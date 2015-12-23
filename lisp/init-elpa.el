@@ -1,5 +1,3 @@
-;;; Find and load the correct package.el
-
 ;; When switching between Emacs 23 and 24, we always use the bundled package.el in Emacs 24
 (let ((package-el-site-lisp-dir
        (expand-file-name "site-lisp/package" user-emacs-directory)))
@@ -9,38 +7,9 @@
     (setq load-path (remove package-el-site-lisp-dir load-path))))
 
 (require 'package)
-
-
-;;; Standard package repositories
-
-;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-
-;; We include the org repository for completeness, but don't normally
-;; use it.
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-
-(when (< emacs-major-version 24)
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-
-;;; Also use Melpa for most packages
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
-
-
-
-;; If gpg cannot be found, signature checking will fail, so we
-;; conditionally enable it according to whether gpg is available. We
-;; re-run this check once $PATH has been configured
-;; (defun sanityinc/package-maybe-enable-signatures ()
-;;   (setq package-check-signature (if (executable-find "gpg") 'allow-unsigned)))
-
-;; (sanityinc/package-maybe-enable-signatures)
-;; (after-load 'init-exec-path
-;;   (sanityinc/package-maybe-enable-signatures))
-
-
-
-;;; On-demand installation of packages
 
 (defun require-package (package &optional min-version no-refresh)
   "Install given PACKAGE, optionally requiring MIN-VERSION.
@@ -67,7 +36,6 @@ locate PACKAGE."
      (message "Couldn't install package `%s': %S" package err)
      nil)))
 
-;;; Fire up package.el
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -83,9 +51,5 @@ you'd better update it to >= 24.3. Install the cl-lib now?")
     (message "The cl-lib has been automatically installed,
 but you'd better update to Emacs >= 24.3.
 Or, move the cl-lib.el to 'EMACS-INSTALLATION-PATH/lisp/emacs-lisp'")))
-
-;; (require-package 'fullframe)
-;; (fullframe list-packages quit-window)
-
 
 (provide 'init-elpa)
