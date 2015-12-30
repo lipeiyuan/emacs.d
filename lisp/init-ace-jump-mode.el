@@ -1,0 +1,5 @@
+(require-package 'ace-jump-mode)
+(global-set-key (kbd "C-l") 'ace-jump-word-mode)
+(setq ace-jump-mode-gray-background nil)
+(setq ace-jump-mode-scope 'visible)
+(provide 'init-ace-jump-mode)
