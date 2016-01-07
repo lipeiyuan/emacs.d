@@ -58,10 +58,6 @@
 (prefer-coding-system 'utf-8)
 (setq default-buffer-file-coding-system 'utf-8-unix)
 
-;; buffer
-(require 'ibuffer)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
 ;; 设置一些变量的值
 (setq-default
  buffers-menu-max-size 20
